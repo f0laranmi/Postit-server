@@ -25,8 +25,13 @@ app.use(express.json())
 app.use(cors())
 
 // routes
+// Comment code
+app.get('/', (req, res) => {
+    res.send('WELCOME TO POST IT API')
+})
 app.use("/api", authRouter)
 app.use("/api", auth, storyRouter)
+
 // error routes
 app.use((req, res) => {
     res.status(404).json({message: 'Resource not found'})
