@@ -40,6 +40,7 @@ const getAllStories = async (req, res) => {
   //create story
   const createStory = async (req, res) => {
    const {userId} = req.user
+
 //    get access to the image in the req.files
    try {
     // image upload
@@ -48,12 +49,13 @@ const getAllStories = async (req, res) => {
         folder: 'postitfileimages'
     })
     req.body.image = result.secure_url
-    fs.unlinkSync(req.files.image.tempFilePatch)
+    fs.unlinkSync(req.files.image.tempFilePath)
     req.body.writtenBy = userId
     // send post request
     const story = await Story.create({...req.body})
     res.status(201).json({success: true, story})
    } catch (error) {
+
     res.json(error)
    }
   };
